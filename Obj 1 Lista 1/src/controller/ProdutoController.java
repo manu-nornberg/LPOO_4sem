@@ -29,7 +29,7 @@ public class ProdutoController {
 
         Produto produto3 = new Produto("batata", "Frita", 5.00, 6);
         System.out.println("Imprimindo em toString");
-        System.out.println(produto3.toString()); //imprimindo em String
+        System.out.println(produto3); //imprimindo em String
 
         //mais produtos pro exercicio 2
         Produto produto4 = new Produto("feijao", "preto", 5.00, 10);
@@ -60,6 +60,7 @@ public class ProdutoController {
 
         //pesquisando pelo filter
         Produto produtoAchou = totalProdutos.stream().filter(produto -> produto.getNome().equals("arroz")).findAny().orElse(null);
+        System.out.println("Imprimindo pesquisa com filtro");
         System.out.println(produtoAchou);
 
         //map
