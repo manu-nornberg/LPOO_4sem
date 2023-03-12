@@ -1,11 +1,11 @@
 package Model;
 
 public class Aluno {
-    Integer id;
-    Integer cpf;
-    String nome;
-    String sobrenome;
-    String email;
+    private Integer id;
+    private String cpf;
+    private String nome;
+    private String sobrenome;
+    private String email;
 
     public Aluno() {
     }
@@ -17,7 +17,7 @@ public class Aluno {
 
 
 
-    public Aluno(Integer id, Integer cpf, String nome, String sobrenome, String email) {
+    public Aluno(Integer id, String cpf, String nome, String sobrenome, String email) {
         this.id = id;
         this.cpf = cpf;
         this.nome = nome;
@@ -33,11 +33,11 @@ public class Aluno {
         this.id = id;
     }
 
-    public Integer getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(Integer cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

@@ -33,4 +33,6 @@ bin/
 out
 .DS_Store
 /out
+/idea
+.xml
 
