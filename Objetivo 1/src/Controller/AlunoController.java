@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Aluno;
 
+import javax.sound.midi.Soundbank;
 import java.util.*;
 
 public class AlunoController {
@@ -64,7 +65,7 @@ public class AlunoController {
         totalAlunos.add(aluno4);
         totalAlunos.add(aluno5);
         totalAlunos.add(aluno6);
-        System.out.println("\nImprimindo total de ID de alunos pelo List");
+        System.out.println("\nImprimindo ID de alunos pelo List");
         System.out.println(totalAlunos);
 
         //criacao do map
@@ -75,12 +76,23 @@ public class AlunoController {
         alunoMap.put(aluno4.getId(), aluno4);
         alunoMap.put(aluno5.getId(), aluno5);
         alunoMap.put(aluno6.getId(), aluno6);
-        System.out.println("\nImprimindo total de ID de alunos pelo Map");
+        System.out.println("\nImprimindo ID de alunos pelo Map");
         System.out.println(alunoMap);
 
         //ordenando pelo id decrescente
         totalAlunos.sort(Comparator.comparing(Aluno::getId).reversed());
-        System.out.println("");
+        System.out.println("\nImprimindo pelo ID decrescente");
+        System.out.println(totalAlunos);
+
+        //pesquisando o id = 5 pelo list
+        Aluno alunoAchou = totalAlunos.stream()
+                .filter(aluno -> aluno.getId()
+                        .equals(500)).findAny().orElse(null);
+        System.out.println("\nImprimindo pesquisa do ID 5 com o list");
+
+        //pesquisando o id = 5 com o map
+        System.out.println("\nImprimindo pesquisa do ID 5 com o map");
+        System.out.println(alunoMap.get(500));
 
 
 
