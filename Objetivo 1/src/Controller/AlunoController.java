@@ -2,7 +2,6 @@ package Controller;
 
 import Model.Aluno;
 
-import javax.sound.midi.Soundbank;
 import java.util.*;
 
 public class AlunoController {
@@ -89,12 +88,11 @@ public class AlunoController {
                 .filter(aluno -> aluno.getId()
                         .equals(500)).findAny().orElse(null);
         System.out.println("\nImprimindo pesquisa do ID 5 com o list");
+        System.out.println(alunoAchou);
 
         //pesquisando o id = 5 com o map
         System.out.println("\nImprimindo pesquisa do ID 5 com o map");
         System.out.println(alunoMap.get(500));
-
-
 
     }
 }
