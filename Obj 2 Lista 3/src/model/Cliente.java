@@ -1,8 +1,8 @@
 package model;
 
 public class Cliente implements Investidor{
-    String nome, sobrenome, ticker;
-    int quantidade;
+    private String nome, sobrenome, ticker;
+    private int quantidade;
 
     //construtores
     public Cliente(String nome, String sobrenome, String ticker, int quantidade) {

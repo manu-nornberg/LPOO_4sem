@@ -2,9 +2,9 @@ package model;
 
 public class Caminhao extends Veiculo implements Automovel {
 
-    public String redavam;
-    public String chassi;
-    public String placa;
+    private String redavam;
+    private String chassi;
+    private String placa;
     private int capacidadeCarga;
 
     public Caminhao(int numeroDeEixos, int anoFabricacao, String propulsao, String marca, String modelo, String redavam, String chassi, String placa, int capacidadeCarga) {

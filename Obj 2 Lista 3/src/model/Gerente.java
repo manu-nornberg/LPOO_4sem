@@ -2,8 +2,8 @@ package model;
 
 public class Gerente extends Funcionario implements Investidor{
 
-    public String ticker;
-    public int quantidade;
+    private String ticker;
+    private int quantidade;
 
     //construtores
     public Gerente(String nome, double salario, String ticker, int quantidade) {

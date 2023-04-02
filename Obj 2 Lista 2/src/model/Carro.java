@@ -3,9 +3,9 @@ package model;
 public class Carro extends Veiculo implements Automovel {
 
     private int capacidadePortaMalas;
-    public String renavam;
-    public String chassi;
-    public String placa;
+    private String renavam;
+    private String chassi;
+    private String placa;
 
 
     public Carro(int numeroDeEixos, int anoFabricacao, String propulsao, String marca, String modelo, int capacidadePortaMalas, String renavam, String chassi, String placa) {
