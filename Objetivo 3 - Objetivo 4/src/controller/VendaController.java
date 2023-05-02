@@ -58,38 +58,13 @@ public class VendaController {
         itemList.add(i);
         itemList.add(i1);
 
-        System.out.println("\n========= itens da venda 1========= ");
+        System.out.println("\n========= itens da venda 1 ========= ");
         itemList.forEach(item->{
             System.out.println(item);
         });
 
-        System.out.println("\n=======STATUS DO PEDIDO=====\n" + Tipo.valueOf("PENDENTE"));
-
-        //verificando o estoque da venda 1
-        System.out.println("\n========Estoque depois da venda==========");
-        p1.setQnt(p1.getQnt() - i.getQnt());
-        System.out.println("Estoque produto:" + " " + p1.getNome() + " = " + p1.getQnt() + " unidades");
-        try{
-            if (p1.getQnt() <= 0){
-                throw new ExcecaoEstoque();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            System.err.println("Erro!");
-            Tipo.valueOf("CANCELADO");
-        }
-
-        p2.setQnt(p2.getQnt() - i1.getQnt());
-        System.out.println("Estoque produto:" + " " + p2.getNome() + " = " + p2.getQnt() + " unidades");
-        try{
-            if (p2.getQnt() <= 0){
-                throw new ExcecaoEstoque();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            System.err.println("Erro!");
-            Tipo.valueOf("CANCELADO");
-        }
+        System.out.println("\n======= STATUS DO PEDIDO =====\n" + Tipo.valueOf("PENDENTE"));
+        System.out.println("\n===AGUARDANDO CHECAGEM DE ESTOQUE===");
 
         //pedido 1
         double valorTotal = 0.0;
@@ -98,9 +73,15 @@ public class VendaController {
         }
         Pedido pe1 = new Pedido(1, LocalDate.of(2032, 04, 26), valorTotal, (Vendedor) v1, itemList);
         System.out.println("\n========= Pedido 1 ========= ");
+        System.out.println("\n=======STATUS DO PEDIDO=====\n");
+        pe1.venda();
         System.out.println(pe1);
-        System.out.println("\n=======STATUS DO PEDIDO=====\n" + pe1.getTipo());
 
+        //verificando o estoque da venda 1
+        System.out.println("\n========Estoque depois da venda==========");
+        produtoList.forEach(p->{
+            System.out.println(p);
+        });
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -117,6 +98,7 @@ public class VendaController {
         });
 
         System.out.println("\n=======STATUS DO PEDIDO=====\n" + Tipo.valueOf("PENDENTE"));
+        System.out.println("\n===AGUARDANDO CHECAGEM DE ESTOQUE===");
 
         //pedido 2
         double valorTotal1 = 0.0;
@@ -125,44 +107,15 @@ public class VendaController {
         }
         Pedido pe2 = new Pedido(2, LocalDate.of(2023, 06, 21), valorTotal1, (Vendedor) v1, itemList1);
         System.out.println("\n========= Pedido 2 ========= ");
+        System.out.println("\n=======STATUS DO PEDIDO=====\n");
+        pe2.venda();
         System.out.println(pe2);
-        System.out.println("\n=======STATUS DO PEDIDO=====\n" + pe2.getTipo());
 
         //verificando o estoque depois da venda 2
         System.out.println("\nEstoque depois da venda 2= ");
-        p1.setQnt(p1.getQnt() - i4.getQnt());
-        System.out.println("Estoque produto:" + " " + p1.getNome() + " = " + p1.getQnt() + " unidades");
-        try{
-            if (p1.getQnt() <= 0){
-                throw new ExcecaoEstoque();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            System.err.println("Erro!");
-            Tipo.valueOf("CANCELADO");
-        }
-        p3.setQnt(p3.getQnt() - i2.getQnt());
-        System.out.println("Estoque produto:" + " " + p3.getNome() + " = " + p3.getQnt() + " unidades");
-        try{
-            if (p3.getQnt() <= 0){
-                throw new ExcecaoEstoque();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            System.err.println("Erro!");
-            Tipo.valueOf("CANCELADO");
-        }
-        p4.setQnt(p4.getQnt() - i3.getQnt());
-        System.out.println("Estoque produto:" + " " + p4.getNome() + " = " + p4.getQnt() + " unidades");
-        try{
-            if (p4.getQnt() <= 0){
-                throw new ExcecaoEstoque();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            System.err.println("Erro!");
-            Tipo.valueOf("CANCELADO");
-        }
+        produtoList.forEach(p->{
+            System.out.println(p);
+        });
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -188,23 +141,29 @@ public class VendaController {
         f1.getProdutos().add(p2);
         System.out.println(f1);
 
+
+        //criando fornecimento dos produtos
         //ja esta criado um fornecedor
         System.out.println("\nAumentando o estoque= ");
         p1.setFornecedor(f1);
         f1.setEstoque(100);
+        int estoquep1 = f1.getEstoque();
         p1.getAumentaEstoque();
+        System.out.println("Fornecedor= " + f1.getNome() + ", aumentou o estoque para= " + estoquep1 + " unidades");
         System.out.println("Nome do produto= " + p1.getNome() + ", Quantidade nova= " + p1.getQnt() + " unidades");
 
         p2.setFornecedor(f1);
         f1.setEstoque(11);
         p2.getAumentaEstoque();
+        int estoquep2 = f1.getEstoque();
+        System.out.println("Fornecedor= " + f1.getNome() + ", aumentou o estoque para= " + estoquep2 + " unidades");
         System.out.println("Nome do produto= " + p2.getNome() + ", Quantidade nova= " + p2.getQnt() + " unidades");
 
-
-        //criando fornecimento dos produtos
         System.out.println("\n=====Criando fornecimentos dos produtos====");
-        Fornecimento for1 = new Fornecimento(LocalDate.of(2023, 04, 20), p1.getPreco() * p1.getQnt(), p1, f1);
-        Fornecimento for2 = new Fornecimento(LocalDate.of(2023, 04, 25), p2.getPreco() * p2.getQnt(), p2, f1);
+        Fornecimento for1 = new Fornecimento(LocalDate.of(2023, 04, 20), p1.getPreco() * estoquep1, p1, f1);
+        Fornecimento for2 = new Fornecimento(LocalDate.of(2023, 04, 25), p2.getPreco() * estoquep2, p2, f1);
+
+
 
         List<Fornecimento> fornecimentos = new ArrayList<>();
         fornecimentos.add(for1);
@@ -217,6 +176,24 @@ public class VendaController {
             custoTotal += forne.getValorTotal();
         }
         System.out.println("\nCusto total de fornecimento= " + custoTotal);
+
+//////////////////////////////////////////////////////////////////////////
+        System.out.println("\n=====Realizando uma vendo com execeçao========");
+        Item i5 = new Item(10,300,0,p3);
+
+        //pedido 2
+        double valorTotal3 = 0.0;
+        for(Item it : itemList1){
+            valorTotal3 += it.getValorTotalItem();
+        }
+        Pedido pe3 = new Pedido(2, LocalDate.of(2023, 4, 15), valorTotal3, (Vendedor) v1);
+        pe3.getItens().add(i5);
+
+        System.out.println("\n=======STATUS DO PEDIDO=====\n" + Tipo.valueOf("PENDENTE"));
+        System.out.println("\n===AGUARDANDO CHECAGEM DE ESTOQUE===");
+
+        System.out.println("\n========= Pedido 3 ========= ");
+        pe3.venda();
 
     }
 }

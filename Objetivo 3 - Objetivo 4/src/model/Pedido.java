@@ -18,6 +18,14 @@ public class Pedido {
     public Pedido() {
     }
 
+    public Pedido(int numero, LocalDate data, double valor, Vendedor vendedor) {
+        this.numero = numero;
+        this.data = data;
+        this.valor = valor;
+        this.vendedor = vendedor;
+        this.tipo = Tipo.valueOf("ATENDIDO");
+    }
+
     public Pedido(int numero, LocalDate data, double valor, Vendedor vendedor, List<Item> itens) {
         this.numero = numero;
         this.data = data;
@@ -73,6 +81,24 @@ public class Pedido {
 
     public void setTipo(Tipo tipo) {
         this.tipo = tipo;
+    }
+
+    public void venda() throws ExcecaoEstoque{
+        try{
+            this.getItens().forEach(i-> {
+                if (i.getProduto().getQnt() < i.getQnt()) {
+                    throw new ExcecaoEstoque();
+                }
+            });
+            System.out.println(Tipo.valueOf("ATENDIDO"));
+            this.getItens().forEach(item -> {
+                item.getProduto().diminuiEstoque(item.getQnt());
+            });
+        }catch (Exception e){
+            e.getMessage();
+            e.printStackTrace();
+            System.err.println("Erro! STATUS PEDIDO= " + Tipo.valueOf("CANCELADO"));
+        }
     }
 
     @Override

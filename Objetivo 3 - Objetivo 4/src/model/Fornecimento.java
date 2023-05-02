@@ -53,7 +53,7 @@ public class Fornecimento {
     public String toString() {
         return "Fornecimento{" +
                 "data=" +  DateTimeFormatter.ofPattern("dd/MM/yyyy").format(data) +
-                ", valorTotal=" + valorTotal +
+                ", Valor Total=" + valorTotal +
                 ", " + produto +
                 "\nFornecedor = CNPJ= " + fornecedor.getCnpj() +
                 ", Contato= " + fornecedor.getContato() +

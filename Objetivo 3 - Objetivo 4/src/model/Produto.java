@@ -77,7 +77,12 @@ public class Produto {
    public int getAumentaEstoque() {
       return aumentaEstoque = fornecedor.getEstoque();}
 
-
+    public void aumentaEstoque1(int qnt){
+        this.qnt += qnt;
+    }
+    public void diminuiEstoque(int qnt){
+        this.qnt -= qnt;
+    }
     @Override
     public String toString() {
         return "Produto{" +
